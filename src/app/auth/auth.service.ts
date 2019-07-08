@@ -9,7 +9,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import { ActivarLoadingAction, DesactivarLoadingAction } from '../shared/ui.actions';
-import { SetUserAction } from './auth.actions';
+import { SetUserAction, UnsetUserAction } from './auth.actions';
 import { Subscription } from 'rxjs';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private router: Router,
     private afDB: AngularFirestore,
-    private store: Store<AppState>
+    private store: Store<AppState>,
   ) {}
 
   crearUsuario(nombre, email, password) {
@@ -68,6 +68,7 @@ export class AuthService {
   logout() {
     this.router.navigate(['login']);
     this.afAuth.auth.signOut();
+    this.store.dispatch(new UnsetUserAction());
   }
 
   initAuthListener() {
