@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IngresoEgreso } from './ingreso-egreso.model';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.reducer';
 import { IngresoEgresoService } from './ingreso-egreso.service';
 import Swal from 'sweetalert2';
 
+import * as fromIngresoEgreso from '../ingreso-egreso/ingreso-egreso.reducer';
 
 @Component({
   selector: 'app-ingreso-egreso',
@@ -16,7 +16,7 @@ export class IngresoEgresoComponent implements OnInit {
   ingresoForm: FormGroup;
   tipo = 'ingreso';
 
-  constructor(private store: Store<AppState>, private ingresoEgresoService: IngresoEgresoService) { }
+  constructor(private store: Store<fromIngresoEgreso.AppState>, private ingresoEgresoService: IngresoEgresoService) { }
 
   ngOnInit() {
     this.ingresoForm = new FormGroup({
